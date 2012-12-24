@@ -79,6 +79,7 @@ Ext.define('AM.controller.Users', {
       store.add(values);
 
       store.sync();
+			// store.sort('id', 'DESC'); 
       win.close();
     }
 

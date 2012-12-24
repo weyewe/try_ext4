@@ -12,23 +12,7 @@ Ext.define('AM.model.User', {
     { type: 'presence', field: 'email' }
   ],
 
-  idProperty: 'id',
-	// proxy: {
-	// 	url: '/users',
-	// 	type: 'rest',
-	// 	format: 'json',
-	// 
-	// 	reader: {
-	// 		root: 'users',
-	// 		record: 'user',
-	// 		successProperty: 'success',
-	// 	},
-	// 	writer: {
-	// 		// wrap user params for Rails
-	// 		getRecordData: function(record) {
-	// 			return { user: record.data };
-	// 		}
-	// 	}
-	// }
+  idProperty: 'id' 
+	
   
 });

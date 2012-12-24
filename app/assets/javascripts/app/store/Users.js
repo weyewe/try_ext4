@@ -6,9 +6,8 @@ Ext.define('AM.store.Users', {
   autoLoad: {start: 0, limit: this.pageSize},
 	autoLoad: false,
   autoSync: false,
-	pageSize : 2, 
+	pageSize : 10, 
 	
-
 	proxy: {
 			url: '/users',
 			type: 'rest',
@@ -27,6 +26,20 @@ Ext.define('AM.store.Users', {
 				}
 			}
 		},
+		
+		
+		// first shite will be added first 
+		sorters : [
+			{
+				property	: 'id',
+				direction	: 'DESC'
+			}
+		],
+		
+		// next task 	: for the data failed to be created.. on failure.. don't append
+	
+
+		// we need to sort, based on the id, DESC
 
   listeners: {
     load: function() {
@@ -37,6 +50,11 @@ Ext.define('AM.store.Users', {
     },
     beforesync: function() {
       console.log(arguments);
-    }
-  }
+    },
+
+		write		: function(store, operation){
+			console.log(' on write is called: we want to append new row @ the beginning' ) ;
+			store.sort('id','DESC');
+		}
+  } 
 });

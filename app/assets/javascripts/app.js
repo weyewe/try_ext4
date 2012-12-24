@@ -16,3 +16,17 @@ Ext.application({
 
   autoCreateViewport: true,
 });
+
+
+Ext.onReady(function(){
+	Ext.Ajax.on('beforerequest', function(conn, options) {
+	    var content, metatag;
+	    metatag = Ext.select('meta[name="csrf-token"]');
+	    if (metatag.first() != null) {
+	      content = metatag.first().dom.content;
+	      options.headers || (options.headers = {});
+	      return options.headers["X-CSRF-Token"] = content;
+	    }
+	  }, this);
+	
+});

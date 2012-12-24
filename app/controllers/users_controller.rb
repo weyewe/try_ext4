@@ -1,8 +1,8 @@
 class UsersController < ApplicationController
   def index
-    @users = User.limit(2)
+    # @users = User.limit(2).order("id DESC")
     
-    @users = User.page(params[:page]).per(params[:limit])
+    @users = User.page(params[:page]).per(params[:limit]).order("id DESC")
 
     respond_to do |format|
       format.json { render :json => { :users => @users , :total => User.all.count } }
