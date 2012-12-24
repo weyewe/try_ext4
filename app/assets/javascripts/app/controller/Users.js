@@ -76,10 +76,28 @@ Ext.define('AM.controller.Users', {
         form.getForm().markInvalid(errors);
       }
     } else { // perform create
-      store.add(values);
-
-      store.sync();
-			// store.sort('id', 'DESC'); 
+			//       store.add(values);
+			// 
+			//       store.sync({
+			// 	success: function(){
+			// 		console.log("I am successful");
+			// 	}, 
+			// 	failure: function(){
+			// 		console.log("i am not successful");
+			// 	}
+			// 	
+			// });
+			
+			var r = Ext.create('AM.model.User', values);
+			var errors = r.validate();
+			
+			if( errors.isValid()){
+				console.log("in the creating. checking is valid == true ");
+				Ext.MessageBox.alert("IsValid", "Gonna save to the server");
+			}else{
+				Ext.MessageBox.alert("NOT Valid", "NOT Gonna save to the server. Not gonna append");
+				console.log(" in the creating. checking is valid == false ");
+			}
       win.close();
     }
 
