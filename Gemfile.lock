@@ -44,6 +44,9 @@ GEM
     i18n (0.6.1)
     journey (1.0.4)
     json (1.7.5)
+    kaminari (0.14.1)
+      actionpack (>= 3.0.0)
+      activesupport (>= 3.0.0)
     mail (2.4.4)
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
@@ -101,6 +104,7 @@ PLATFORMS
 
 DEPENDENCIES
   coffee-rails
+  kaminari
   rails (= 3.2.0)
   sass-rails
   sqlite3
