@@ -12,13 +12,15 @@ Ext.application({
 
   appFolder: '/assets/app',
 
-  controllers: ['Users'],
+  controllers: ['Users' ,'Navs'],
 
   autoCreateViewport: true,
 });
 
 
 Ext.onReady(function(){
+	console.log("Inside the onReady");
+	
 	Ext.Ajax.on('beforerequest', function(conn, options) {
 	    var content, metatag;
 	    metatag = Ext.select('meta[name="csrf-token"]');
