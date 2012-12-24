@@ -3,8 +3,11 @@ Ext.define('AM.store.Users', {
   extend: 'Ext.data.Store',
 
   model: 'AM.model.User',
-  autoLoad: true,
+  autoLoad: {start: 0, limit: this.pageSize},
+	autoLoad: false,
   autoSync: false,
+	pageSize : 2, 
+	
 
 	proxy: {
 			url: '/users',
@@ -15,6 +18,7 @@ Ext.define('AM.store.Users', {
 				root: 'users',
 				record: 'user',
 				successProperty: 'success',
+				totalProperty : 'total'
 			},
 			writer: {
 				// wrap user params for Rails

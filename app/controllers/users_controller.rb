@@ -1,9 +1,9 @@
 class UsersController < ApplicationController
   def index
-    @users = User.all
+    @users = User.limit(2)
 
     respond_to do |format|
-      format.json { render :json => { :users => @users } }
+      format.json { render :json => { :users => @users , :total => User.all.count } }
     end
   end
 

@@ -29,18 +29,26 @@ Ext.define('AM.view.user.List' ,{
       disabled: true
     });
 
+	 
     this.tbar = [this.addUserButton, this.editUserButton, this.deleteUserButton];
+		this.bbar = Ext.create("Ext.PagingToolbar", {
+			store	: this.store, 
+			displayInfo: true,
+			displayMsg: 'Displaying topics {0} - {1} of {2}',
+			emptyMsg: "No topics to display" 
+		});
 
     this.callParent(arguments);
   },
 
-	dockedItems: [{
-	        xtype: 'pagingtoolbar',
-	        store: this.store,   // same store GridPanel is using
-	        dock: 'bottom',
-	        displayInfo: true
-	    }], 
+	// dockedItems: [{
+	// 	        xtype: 'pagingtoolbar',
+	// 	        store: this.store,   // same store GridPanel is using
+	// 	        dock: 'bottom',
+	// 	        displayInfo: true
+	// 	    }], 
 	
+	loadMask	: true,
   getSelectedUser: function() {
     return this.getSelectionModel().getSelection()[0];
   },
