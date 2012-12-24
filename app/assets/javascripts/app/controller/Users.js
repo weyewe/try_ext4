@@ -55,6 +55,7 @@ Ext.define('AM.controller.Users', {
   },
 
   updateUser: function(button) {
+		console.log("YEaaah baby, we are in the update user");
     var win = button.up('window');
     var form = win.down('form');
 
@@ -62,44 +63,120 @@ Ext.define('AM.controller.Users', {
     var record = form.getRecord();
     var values = form.getValues();
 
-    if (record) { // perform update
-      var r = Ext.create('AM.model.User', values);
-
-      var errors = r.validate();
-      if (errors.isValid()) {
-        record.set(values);
-
-        store.sync();
-        win.close();
-      } else {
-        console.log(errors);
-        form.getForm().markInvalid(errors);
-      }
-    } else { // perform create
-			//       store.add(values);
-			// 
-			//       store.sync({
-			// 	success: function(){
-			// 		console.log("I am successful");
-			// 	}, 
-			// 	failure: function(){
-			// 		console.log("i am not successful");
-			// 	}
-			// 	
-			// });
+	 	//  loadRecord( model ) => FORM => getRecord() => give back the model
+		// it means: if it is a new form, getRecord() will produce nil 
+		// if an edit/update form, getRecord() will not be nil 
+		
+		//form.getValues is simply the form's field content 
+		// format : name : value 
+		
+		// how can we check whether a model is valid?
+		
+		// form.isValid() will only check the form's validation. not the model's validation
+		// form validation	: allowBlank?
+		
+		// var newObject = new AM.model.User( {} );
+		// var errors = newObject.validate(); => will be validated against model's validation 
+		// newObject.isValid() => run through the newObject.validate().. then, will use the errors.isValid()
+		// newObject.join(AM.model.User);
+		// newObject.save  => use the proxy @ model.. hit the server
+		// how can we propagate the changes to the grid?
+		// store.sync() 
+		
+		// TASK: separate between CREATE or UPDATE
+		record.beginEdit(); 
+		if( record ){
+			// if there is record present in the form, this must be an update
+			record.set( values );
+			// just by setting the values, the gridPanel is changed!!! FUCK!
 			
-			var r = Ext.create('AM.model.User', values);
-			var errors = r.validate();
-			
-			if( errors.isValid()){
-				console.log("in the creating. checking is valid == true ");
-				Ext.MessageBox.alert("IsValid", "Gonna save to the server");
+			if( record.isValid() ) {
+				// record.save(); 
+				record.endEdit(); 
+				store.sync(); 
+				
+				win.close(); 
 			}else{
-				Ext.MessageBox.alert("NOT Valid", "NOT Gonna save to the server. Not gonna append");
-				console.log(" in the creating. checking is valid == false ");
+				
+				var errors = record.validate(); 
+				form.getForm().markInvalid(errors);
+				console.log("The record isn ot valid. NO UPDATE");
+				record.cancelEdit();
 			}
-      win.close();
-    }
+			
+		}
+		
+		
+				// 
+				// if(record){
+				// 	var r = Ext.create("AM.model.User", values) ;
+				// 	
+				// 	
+				// 	if( errors.isValid() ){
+				// 		record.set(values) ; // update the content of record 
+				// 	}
+				// 	
+				// 	// this record is managed by store.
+				// 	// store.sync() will synchronize the changes in the client to the server 
+				// 	store.sync();
+				// 	win.close();
+				// 	Ext.MessageBox.alert("Create User Success", "User #{record.first_name} is created");
+				// 	
+				// 	return; 
+				// }else{
+				// 	// there is no record in the form
+				// 	// banzai.. most likely, it is new shite creation 
+				// 	
+				// 	store.add(values);
+				// 	store.sync({
+				// 		success : function(){
+				// 			console.log("Successfully saving the store");
+				// 		},
+				// 		failure	: function(){
+				// 			console.log(" fail to create new record");
+				// 		}
+				// 	});
+				// }
+
+			//     if (record) { // perform update
+			//       var r = Ext.create('AM.model.User', values);
+			// 
+			//       var errors = r.validate();
+			//       if (errors.isValid()) {
+			//         record.set(values);
+			// 
+			//         store.sync();
+			//         win.close();
+			//       } else {
+			//         console.log(errors);
+			//         form.getForm().markInvalid(errors);
+			//       }
+			//     } else { // perform create
+			// //       store.add(values);
+			// // 
+			// //       store.sync({
+			// // 	success: function(){
+			// // 		console.log("I am successful");
+			// // 	}, 
+			// // 	failure: function(){
+			// // 		console.log("i am not successful");
+			// // 	}
+			// // 	
+			// // });
+			// 
+			// var r = Ext.create('AM.model.User', values);
+			// var errors = r.validate();
+			// 
+			// if( errors.isValid()){
+			// 	console.log("in the creating. checking is valid == true ");
+			// 	Ext.MessageBox.alert("IsValid", "Gonna save to the server");
+			// }else{
+			// 	Ext.MessageBox.alert("NOT Valid", "NOT Gonna save to the server. Not gonna append");
+			// 	console.log(" in the creating. checking is valid == false ");
+			// 	form.getForm().markInvalid(errors);
+			// }
+			//       // win.close();
+			//     }
 
   },
 

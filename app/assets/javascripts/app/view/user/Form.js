@@ -4,6 +4,7 @@ Ext.define('AM.view.user.Form', {
 
   title : 'Add / Edit User',
   layout: 'fit',
+	width	: 500,
   autoShow: true,  // does it need to be called?
 // win.show() 
 // if autoShow == true.. on instantiation, will automatically be called 
