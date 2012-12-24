@@ -6,13 +6,23 @@ Ext.define('AM.controller.Users', {
 
   views: [
     'user.List',
-    'user.Form'
+    'user.Form',
+	'Cardpanel', 
+	'user.Dashboard',
+	'user.DepartmentManager',
+	'user.EmployeeManager'
   ],
 
-  refs: [{
-    ref: 'list',
-    selector: 'userlist'
-  }],
+  refs: [
+		{
+    	ref: 'list',
+    	selector: 'userlist'
+  	},
+		{
+			ref	: 'cardPanel',
+			selector	: 'cardpanel'
+		}
+	],
 
   init: function() {
     this.control({
@@ -31,12 +41,63 @@ Ext.define('AM.controller.Users', {
       },
       'button[action=deleteUser]': {
         click: this.deleteUser
-      }
+      },
+
+	  	'cardpanel button[action=changetoolbar]' : {
+				click		: this.changeToolbar 
+			}
+		
     });
   },
 
+	changeToolbar		: function(btn , event, eOpts){
+	 
+		var buttons = this.getCardPanel().query('button[action=changetoolbar]');
+		Ext.each( buttons, function( new_btn ) {
+			if( new_btn.itemType !== btn.itemType  && new_btn.pressed == true ){
+				new_btn.toggle();
+			} 
+		});
+		 
+		console.log("The button's itemType (xtype) reference: " + btn.itemType ) ;
+		// current Active Item index 
+		var cardPanel = this.getCardPanel(); 
+		
+		var cardLayout = cardPanel.getLayout(); 
+		var currentActiveItem = cardLayout.activeItem;
+		var currentActiveItemIndex = cardPanel.items.indexOf(currentActiveItem);
+		console.log("current active item index: " + currentActiveItemIndex );
+		
+		// new Active Item Index
+		var xtype    = btn.itemType;
+		console.log("SEARCHING FOR xtype: " + xtype );
+    var newActiveItem   = cardPanel.query(xtype)[0]; 
+		var newActiveItemIndex = cardPanel.items.indexOf(newActiveItem);
+		console.log("new active item index: " + newActiveItemIndex );
+		
+		// if no such item == index == -1 
+		if( newActiveItemIndex !== currentActiveItemIndex ) {
+			console.log("Gonna switch card from " +currentActiveItemIndex + " TO " +  newActiveItemIndex);
+			
+			cardLayout.setActiveItem( newActiveItemIndex );
+			
+			// if( newActiveItem.cleanSlate ) {
+			// 	newActiveItem.cleanSlate(); 
+			// }
+		}else{
+			btn.pressed = true ; 
+		}
+		
+		// this.getCardPanel().getLayout().setActiveItem(0); 
+	},
+
   addUser: function() {
     var view = Ext.widget('userform');
+// what is Ext.widget? 
+// is that creating a new instance window? 
+// Convenient shorthand to create a widget by its xtype or a config object. S
+
+// If a component instance is passed, it is simply returned. => so, if it is existing, will just be returned
     view.show();
   },
 
@@ -84,8 +145,9 @@ Ext.define('AM.controller.Users', {
 		// store.sync() 
 		
 		// TASK: separate between CREATE or UPDATE
-		record.beginEdit(); 
+		
 		if( record ){
+			record.beginEdit(); 
 			// if there is record present in the form, this must be an update
 			record.set( values );
 			// just by setting the values, the gridPanel is changed!!! FUCK!
@@ -96,14 +158,28 @@ Ext.define('AM.controller.Users', {
 				store.sync(); 
 				
 				win.close(); 
-			}else{
-				
+			}else{ 
+				// record is not valid 
 				var errors = record.validate(); 
 				form.getForm().markInvalid(errors);
 				console.log("The record isn ot valid. NO UPDATE");
 				record.cancelEdit();
 			}
+		}else{
+			//  no record at all 
+			var newObject = new AM.model.User( values ) ;
+			if( newObject.isValid() ){
+				console.log("The new object is valid");
+				store.add( newObject);
+				store.sync(); 
+				win.close();
+				
+			}else{
+				console.log("The new object is not valid ");
+			}
 			
+			var errors = newObject.validate();
+			form.getForm().markInvalid(errors);
 		}
 		
 		

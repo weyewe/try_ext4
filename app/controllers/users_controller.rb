@@ -21,7 +21,7 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-
+    # sleep 2 
     respond_to do |format|
       if @user.update_attributes(params[:user])
         format.json { render :json => { :success => true, :users => [@user] } }

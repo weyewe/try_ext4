@@ -8,10 +8,11 @@ Ext.define('AM.view.user.Form', {
   autoShow: true,  // does it need to be called?
 // win.show() 
 // if autoShow == true.. on instantiation, will automatically be called 
-
+	
   initComponent: function() {
     this.items = [{
       xtype: 'form',
+			msgTarget	: 'side',
       items: [{
         xtype: 'hidden',
         name : 'id',
