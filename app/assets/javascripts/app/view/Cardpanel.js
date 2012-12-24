@@ -16,6 +16,22 @@ Ext.define("AM.view.Cardpanel", {
 		}
 	],
 	
+	// how can we enforce the role?
+	// most likely in the initComponent
+	initComponent: function(){
+
+		//  initComponent can be used to programmatically configure 
+		// the component's config JSON.. => using Ext.apply( this, {}); 
+		
+		// Ext.apply(this, {
+		// 	activeItem : 1 
+		// });
+
+		// this.layout.setActiveItem( 0 ) ; 
+		// so, on initComponent, we can use the role ... 
+		this.callParent(arguments);
+	},
+	// 
 	tbar				: [
 			{
 				text		: 'User List',

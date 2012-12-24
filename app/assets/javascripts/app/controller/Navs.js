@@ -66,3 +66,16 @@ Ext.define('AM.controller.Navs', {
 		// this.getCardPanel().getLayout().setActiveItem(0); 
 	}
 });
+
+
+/*
+
+	Let's treat user as customer..  customer has many sales orders
+	sales order has many sales items
+	
+	we have a database of customers. What we need now is database of 
+	sales orders and sales items 
+	
+	table in the server doesn't necesarilly to be similar to the table @client 
+	
+*/
