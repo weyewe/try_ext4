@@ -1,7 +1,7 @@
 Ext.define('AM.view.customer.Form', {
-	extend: 'AM.view.util.CrudForm', 
-
-	title : 'Add / Edit User',
+	extend		: 'AM.view.util.CrudForm', 
+	alias		: 'widget.customerform',
+	
 	layout: 'fit',
 	width	: 500,
   	autoShow: true,   

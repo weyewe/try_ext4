@@ -19,7 +19,6 @@ Ext.application({
 
 
 Ext.onReady(function(){
-	console.log("Inside the onReady");
 	
 	Ext.Ajax.on('beforerequest', function(conn, options) {
 	    var content, metatag;

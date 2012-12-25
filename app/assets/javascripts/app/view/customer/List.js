@@ -1,9 +1,10 @@
 Ext.define('AM.view.customer.List' ,{
-  	extend: 'AM.view.util.CrudList', 
+  	extend		: 'AM.view.util.CrudList', 	
 
+	alias		: 'widget.customerlist',
   // title : 'All Users',
   	store		: 'Customers', 
-	alias		: 'widget.customerlist',
+	
  
 
 	initComponent: function() {
@@ -13,5 +14,8 @@ Ext.define('AM.view.customer.List' ,{
 
  
 		this.callParent(arguments); 
+		
+		// we set auto load to be false. or else, crazy setup 
+		this.store.load(); 
 	} 
 });
