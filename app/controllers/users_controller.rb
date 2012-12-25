@@ -14,7 +14,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        format.json { render :json => { :success => true, :users => [@user] } }
+        format.json { render :json => { :success => true, :users => [@user] , :total => User.all.count } }
       end
     end
   end
@@ -24,7 +24,7 @@ class UsersController < ApplicationController
     # sleep 2 
     respond_to do |format|
       if @user.update_attributes(params[:user])
-        format.json { render :json => { :success => true, :users => [@user] } }
+        format.json { render :json => { :success => true, :users => [@user], :total => User.all.count  } }
       end
     end
   end
@@ -34,7 +34,7 @@ class UsersController < ApplicationController
     @user.destroy
 
     respond_to do |format|
-      format.json { render :json => { :success => true } }
+      format.json { render :json => { :success => true, :total => User.all.count } }
     end
   end
 end

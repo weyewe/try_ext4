@@ -32,12 +32,12 @@ Ext.define('AM.view.user.List' ,{
 
 	 
     this.tbar = [this.addUserButton, this.editUserButton, this.deleteUserButton];
-		this.bbar = Ext.create("Ext.PagingToolbar", {
-			store	: this.store, 
-			displayInfo: true,
-			displayMsg: 'Displaying topics {0} - {1} of {2}',
-			emptyMsg: "No topics to display" 
-		});
+	this.bbar = Ext.create("Ext.PagingToolbar", {
+		store	: this.store, 
+		displayInfo: true,
+		displayMsg: 'Displaying topics {0} - {1} of {2}',
+		emptyMsg: "No topics to display" 
+	});
 
     this.callParent(arguments);
   },
