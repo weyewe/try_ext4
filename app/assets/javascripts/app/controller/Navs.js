@@ -15,7 +15,6 @@ Ext.define('AM.controller.Navs', {
 	],
 	
 	init			: function(){
-		console.log("init the NAVS controller");
 		this.control({
 			'cardpanel button[action=changetoolbar]' : {
 				click		: this.switchCard 
@@ -25,14 +24,7 @@ Ext.define('AM.controller.Navs', {
 	},
 	
 	
-	switchToolbar		: function( clickedButton) {
-		// the clickedButton's pressed value == the one after the pressing. 
-		
-		
-		// var buttons = this.getCardPanel().query('button[action=changetoolbar]');
-
-		console.log("clicked the xtype	: " + clickedButton.itemType ) ;
-		console.log("clicked button's pressed status	: "  + clickedButton.pressed ) ;
+	switchToolbar		: function( clickedButton) { 
 		var buttons = this.getCardPanel().query('button[action=changetoolbar]');
 		
 		Ext.each( buttons, function( btn ) {
@@ -46,25 +38,7 @@ Ext.define('AM.controller.Navs', {
 				}
 			}
 			
-		});
-		
-		// logic:
-		/*
-			if the current button is the new clicked button, let the button be true 
-			else
-			let the button be false 
-		*/
-		// Ext.each( buttons, function( btn ) {
-		// 	// if( new_btn.itemType !== btn.itemType  && new_btn.pressed == true ){
-		// 	// 	new_btn.toggle();
-		// 	// } 
-		// 
-		// 	if( btn.itemType == clickedButton.itemType  ){
-		// 		btn.pressed = false;
-		// 	}else{
-		// 		btn.pressed = true;
-		// 	}
-		// });
+		}); 
 	},
 	
 	switchActiveCard	: function( clickedButton ) {
