@@ -18,22 +18,56 @@ Ext.define('AM.controller.Navs', {
 		console.log("init the NAVS controller");
 		this.control({
 			'cardpanel button[action=changetoolbar]' : {
-				click		: this.changeToolbar 
+				click		: this.switchCard 
 			}
 		});
 		
 	},
 	
 	
-	changeToolbar		: function(btn , event, eOpts){
-	 
+	switchToolbar		: function( clickedButton) {
+		// the clickedButton's pressed value == the one after the pressing. 
+		
+		
+		// var buttons = this.getCardPanel().query('button[action=changetoolbar]');
+
+		console.log("clicked the xtype	: " + clickedButton.itemType ) ;
+		console.log("clicked button's pressed status	: "  + clickedButton.pressed ) ;
 		var buttons = this.getCardPanel().query('button[action=changetoolbar]');
-		Ext.each( buttons, function( new_btn ) {
-			if( new_btn.itemType !== btn.itemType  && new_btn.pressed == true ){
-				new_btn.toggle();
-			} 
+		
+		Ext.each( buttons, function( btn ) {
+			if( btn.itemType == clickedButton.itemType ){
+				if( btn.pressed == false ) {
+					btn.toggle(); 
+				}
+			}else{
+				if( btn.pressed == true ) {
+					btn.toggle();
+				}
+			}
+			
 		});
-		 
+		
+		// logic:
+		/*
+			if the current button is the new clicked button, let the button be true 
+			else
+			let the button be false 
+		*/
+		// Ext.each( buttons, function( btn ) {
+		// 	// if( new_btn.itemType !== btn.itemType  && new_btn.pressed == true ){
+		// 	// 	new_btn.toggle();
+		// 	// } 
+		// 
+		// 	if( btn.itemType == clickedButton.itemType  ){
+		// 		btn.pressed = false;
+		// 	}else{
+		// 		btn.pressed = true;
+		// 	}
+		// });
+	},
+	
+	switchActiveCard	: function( clickedButton ) {
 		// console.log("The button's itemType (xtype) reference: " + btn.itemType ) ;
 		// current Active Item index 
 		var cardPanel = this.getCardPanel(); 
@@ -44,9 +78,9 @@ Ext.define('AM.controller.Navs', {
 		// console.log("current active item index: " + currentActiveItemIndex );
 		
 		// new Active Item Index
-		var xtype    = btn.itemType;
+		var xtype    = clickedButton.itemType;
 		// console.log("SEARCHING FOR xtype: " + xtype );
-    var newActiveItem   = cardPanel.query(xtype)[0]; 
+    	var newActiveItem   = cardPanel.query(xtype)[0]; 
 		var newActiveItemIndex = cardPanel.items.indexOf(newActiveItem);
 		// console.log("new active item index: " + newActiveItemIndex );
 		
@@ -58,12 +92,14 @@ Ext.define('AM.controller.Navs', {
 			
 			// if( newActiveItem.cleanSlate ) {
 			// 	newActiveItem.cleanSlate(); 
-			// }
-		}else{
-			btn.pressed = true ; 
+			// } 
 		}
 		
-		// this.getCardPanel().getLayout().setActiveItem(0); 
+	}, 
+	
+	switchCard		: function(clickedButton , event, eOpts){ 
+		this.switchToolbar( clickedButton ); 
+		this.switchActiveCard( clickedButton );  
 	}
 });
 
