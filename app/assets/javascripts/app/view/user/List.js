@@ -10,7 +10,7 @@ Ext.define('AM.view.user.List' ,{
 		this.columns = [
 		{ header: 'First Name',  dataIndex: 'first_name',  flex: 1 , sortable: false},
 		{ header: 'Last Name',  dataIndex: 'last_name',  flex: 1 		, sortable: false},
-		{ header: 'Email', dataIndex: 'email', flex: 1		, sortable: false  }
+		{ header: 'Email', dataIndex: 'email',			 flex: 1		, sortable: false  }
 		];
 
 		this.addUserButton = new Ext.Button({

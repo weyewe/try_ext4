@@ -33,13 +33,13 @@ Ext.define('AM.controller.Users', {
       'userform button[action=save]': {
         click: this.updateUser
       },
-      'button[action=addUser]': {
+      'userlist button[action=addUser]': {
         click: this.addUser
       },
-      'button[action=editUser]': {
+      'userlist button[action=editUser]': {
         click: this.editUser
       },
-      'button[action=deleteUser]': {
+      'userlist button[action=deleteUser]': {
         click: this.deleteUser
       }// ,
       // 
