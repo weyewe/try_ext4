@@ -2,6 +2,9 @@ Extjs4AccountManager::Application.routes.draw do
   resources :users
   resources :customers
   resources :employees
+  resources :departments 
+  
+  
   root :to => 'index#index'
 
   # This redirect is a work around for the use of Extjs4 with Rails assets pipeline:

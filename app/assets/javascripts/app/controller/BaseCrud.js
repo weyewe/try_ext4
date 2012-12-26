@@ -74,51 +74,39 @@ Ext.define('AM.controller.BaseCrud', {
 		
 		me.refs	= me.refs? Ext.Array.merge( me.refs, newRefs)	: newRefs; 
 		me.callParent( arguments ); 
-	}
+	},
 	
 
 
 	init: function() {
-		var me= this, key; 
-		me.callParent( arguments); 
-		
-		// var ctrlParams, toControl = {
-		// 	'button[action=add]' : {
-		// 		click	: me.onAddClicked
-		// 	}
-		// 	
-		// };
-		// 
-		// // var	containerSelector = 'somemodelview';
-		// 
-		// for( key in toControl ){
-		// 	if( toControl.hasOwnProperty( key ) ){
-		// 		ctrlParams = {};
-		// 		ctrlParams[me.containerSelector + " " + key] = toControl[key];
-		// 		/* 
-		// 		ctrlParams['somemodelview button[action=add]'] = {
-		// 			click	: me.onAddClicked
-		// 		};
-		// 			
-		// 		*/
-		// 		me.control( ctrlParams ) ;
-		// 	}
-		// }
+		var me	= this ; 
+		me.callParent( arguments);  
 		
 		var ctrlParams= {};
+		
+		
+		ctrlParams[ me.listSelector ] = {
+			selectionchange: me.selectionChange,
+			itemdblclick: me.editObject
+		};
+		
+		// ctrlParams[ me.listSelector ] = {
+		// 	itemdblclick: me.editObject
+		// };
+		 
+		
 		ctrlParams[ me.formSelector + ' ' + 'button[action=save]' ] = {
 			click: me.updateObject
 		};
 		
-		ctrlParams[ me.listSelector ] = {
-			click: me.updateObject
-		};
+		// userlist 
+		// itemdblclick: this.editUser,
+		//         selectionchange: this.selectionchange
 		
 		ctrlParams[me.listSelector	+ ' ' + 'button[action=addObject]'] = {
 			click: me.addObject
 		};
-		
-		
+		 
 		ctrlParams[me.listSelector	+ ' ' +  ' button[action=editObject]'] = {
 			click: me.editObject
 		};
@@ -155,11 +143,14 @@ Ext.define('AM.controller.BaseCrud', {
  
 
 	addObject: function() {
+		console.log("calling addObject from BaseCrud");
 		var view = Ext.widget( this.formSelector  ); 
 		view.show();
+		console.log("finished addObject from BaseCrud");
 	},
 
 	editObject: function() {
+		console.log("Edit object cuuy");
 		var record = this.getList().getSelectedObject(); 
 		var view   = Ext.widget(	this.formSelector  ); 
 		view.down('form').loadRecord(record);
@@ -201,6 +192,7 @@ Ext.define('AM.controller.BaseCrud', {
 			//     age  : 24,
 			//     phone: '555-555-5555'
 			// });
+			
 			var newObject = Ext.create( this.backingModel  ,  values );
 			if( newObject.isValid() ){
 				store.add( newObject);
@@ -233,6 +225,7 @@ Ext.define('AM.controller.BaseCrud', {
 	},
 
 	selectionChange: function(selectionModel, selections) {
+		console.log("Shite man. in selectionChange");
 		var grid = this.getList();
 
 		if (selections.length > 0) {

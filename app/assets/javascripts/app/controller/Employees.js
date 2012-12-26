@@ -76,7 +76,9 @@ Ext.define('AM.controller.Employees', {
     var win = button.up('window');
     var form = win.down('form');
 
-    var store = this.getEmployeesStore();
+	var store = this.getStore( 'Employees' );
+	
+    // var store = this.getEmployeesStore();
     var record = form.getRecord();
     var values = form.getValues();
 
@@ -124,7 +126,9 @@ Ext.define('AM.controller.Employees', {
 		}else{
 			//  no record at all  => gonna create the new one 
 			console.log("NO USER. GONNA CREATE");
-			var newObject = new AM.model.Employee( values ) ;
+			
+			Ext.create( 'AM.model.Employee'  ,  values );
+			// var newObject = new AM.model.Employee( values ) ;
 			if( newObject.isValid() ){
 				console.log("The new object is valid");
 				store.add( newObject);

@@ -18,6 +18,7 @@ Ext.application({
 			'Users' ,
 			'Customers',
 			'Employees',
+			'Departments',
 			'Navs'
 		],
 

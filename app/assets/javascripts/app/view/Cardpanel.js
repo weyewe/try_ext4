@@ -9,7 +9,7 @@ Ext.define("AM.view.Cardpanel", {
 			xtype		: 'userlist'
 		},
 		{
-			xtype		: 'departmentmanager'
+			xtype		: 'departmentlist'
 		},
 		{
 			xtype		: 'employeelist'
@@ -45,7 +45,7 @@ Ext.define("AM.view.Cardpanel", {
 				'-',
 				{
 					text			: 'Manage Departments',
-					itemType		: 'departmentmanager',
+					itemType		: 'departmentlist',
 					toggleGrp		: 'navGrp',
 					enableToggle	: true, 
 					pressed			:  (  selectedActiveItemIndex   === 1 )  ,
