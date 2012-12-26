@@ -1,2 +1,10 @@
-Use this README file to introduce your application and point to useful places in the API for learning more.
-Run "rake doc:app" to generate API documentation for your models, controllers, helpers, and libraries.
+Learning Sencha EXTJS 4
+
+Learning Outcome: 
+1. Hooking it up to the RAILS 3 CRUD operation
+2. extending Controller. 
+	=> The key is in the constructor() and init()
+	
+3. extending View
+	=> THe key action in on the initComponent() << setup the config programmatically
+	
