@@ -56,3 +56,5 @@ Ext.define('AM.view.department.List' ,{
 		this.deleteObjectButton.disable();
 	}
 });
+
+

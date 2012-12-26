@@ -1,8 +1,9 @@
-Ext.define('AM.view.department.Form', {
-  extend: 'Ext.window.Window',
-  alias : 'widget.departmentform',
 
-  title : 'Add / Edit Department',
+Ext.define('AM.view.store.Form', {
+  extend: 'Ext.window.Window',
+  alias : 'widget.storeform',
+
+  title : 'Add / Edit Store',
   layout: 'fit',
 	width	: 500,
   autoShow: true,  // does it need to be called?
@@ -36,8 +37,3 @@ Ext.define('AM.view.department.Form', {
     this.callParent(arguments);
   }
 });
-
-
-
-
-

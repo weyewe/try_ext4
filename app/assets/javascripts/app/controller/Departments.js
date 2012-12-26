@@ -1,3 +1,7 @@
+/*
+	We are trying to extend a base controller.
+	But we haven't extended the view 
+*/
 Ext.define('AM.controller.Departments', {
 	extend: 'AM.controller.BaseCrud',
 

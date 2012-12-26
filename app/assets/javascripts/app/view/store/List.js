@@ -1,32 +1,30 @@
-Ext.define('AM.view.util.CrudList' ,{
-  	extend: 'Ext.grid.Panel', 
+
+Ext.define('AM.view.store.List' ,{
+  	extend: 'Ext.grid.Panel',
+  	alias : 'widget.storelist',
 
   // title : 'All Users',
-  	// store: 'Users', 
-	store	: undefined,
-	title	: undefined, 
+  	store: 'Stores', 
  
 
 	initComponent: function() {
-		// this.columns = [
-		// { header: 'First Name',  dataIndex: 'first_name',  flex: 1 , sortable: false},
-		// { header: 'Last Name',  dataIndex: 'last_name',  flex: 1 		, sortable: false},
-		// { header: 'Email', dataIndex: 'email',			 flex: 1		, sortable: false  }
-		// ];
+		this.columns = [
+			{ header: ' Name',  dataIndex: 'name',  flex: 1 , sortable: false} 
+		];
 
 		this.addObjectButton = new Ext.Button({
-			text: 'Add ',
+			text: 'Add Store',
 			action: 'addObject'
 		});
 
 		this.editObjectButton = new Ext.Button({
-			text: 'Edit ',
+			text: 'Edit Store',
 			action: 'editObject',
 			disabled: true
 		});
 
 		this.deleteObjectButton = new Ext.Button({
-			text: 'Delete ',
+			text: 'Delete Store',
 			action: 'deleteObject',
 			disabled: true
 		});
@@ -44,6 +42,7 @@ Ext.define('AM.view.util.CrudList' ,{
 	},
  
 	loadMask	: true,
+	
 	getSelectedObject: function() {
 		return this.getSelectionModel().getSelection()[0];
 	},
