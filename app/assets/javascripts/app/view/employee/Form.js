@@ -1,6 +1,6 @@
-Ext.define('AM.view.customer.Form', {
+Ext.define('AM.view.employee.Form', {
   extend: 'Ext.window.Window',
-  alias : 'widget.customerform',
+  alias : 'widget.employeeform',
 
   title : 'Add / Edit Customer',
   layout: 'fit',

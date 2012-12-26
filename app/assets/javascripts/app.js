@@ -12,7 +12,14 @@ Ext.application({
 
   appFolder: '/assets/app',
 
-  controllers: ['Users' ,'Navs'],
+	// strange, when we don't have the controller, it is an error.
+  controllers: [
+
+			'Users' ,
+			'Customers',
+			'Employees',
+			'Navs'
+		],
 
   autoCreateViewport: true,
 });

@@ -1,9 +1,9 @@
-Ext.define('AM.view.customer.List' ,{
+Ext.define('AM.view.employee.List' ,{
   	extend: 'Ext.grid.Panel',
-  	alias : 'widget.customerlist',
+  	alias : 'widget.employeelist',
 
   // title : 'All Users',
-  	store: 'Customers', 
+  	store: 'Employees', 
  
 
 	initComponent: function() {
@@ -12,18 +12,18 @@ Ext.define('AM.view.customer.List' ,{
 		];
 
 		this.addUserButton = new Ext.Button({
-			text: 'Add Customer',
+			text: 'Add Employee',
 			action: 'addUser'
 		});
 
 		this.editUserButton = new Ext.Button({
-			text: 'Edit Customer',
+			text: 'Edit Employee',
 			action: 'editUser',
 			disabled: true
 		});
 
 		this.deleteUserButton = new Ext.Button({
-			text: 'Delete Customer',
+			text: 'Delete Employee',
 			action: 'deleteUser',
 			disabled: true
 		});

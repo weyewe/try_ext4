@@ -1,12 +1,12 @@
-Ext.define('AM.controller.Customers', {
+Ext.define('AM.controller.Employees', {
   extend: 'Ext.app.Controller',
 
-  stores: ['Customers'],
-  models: ['Customer'],
+  stores: ['Employees'],
+  models: ['Employee'],
 
   views: [
-    'customer.List',
-    'customer.Form'// ,
+    'employee.List',
+    'employee.Form'// ,
     // 	'Cardpanel',  
     // 	'user.DepartmentManager',
     // 	'user.EmployeeManager'
@@ -15,27 +15,26 @@ Ext.define('AM.controller.Customers', {
   	refs: [
 		{
 			ref: 'list',
-			selector: 'customerlist'
+			selector: 'employeelist'
 		} 
 	],
 
   init: function() {
-		console.log("INit the users controller");
     this.control({
-      'customerlist': {
+      'employeelist': {
         itemdblclick: this.editUser,
         selectionchange: this.selectionChange
       },
-      'customerform button[action=save]': {
+      'employeeform button[action=save]': {
         click: this.updateUser
       },
-      'customerlist button[action=addUser]': {
+      'employeelist button[action=addUser]': {
         click: this.addUser
       },
-      'customerlist button[action=editUser]': {
+      'employeelist button[action=editUser]': {
         click: this.editUser
       },
-      'customerlist button[action=deleteUser]': {
+      'employeelist button[action=deleteUser]': {
         click: this.deleteUser
       }// ,
       // 
@@ -49,7 +48,7 @@ Ext.define('AM.controller.Customers', {
 
   addUser: function() {
 		console.log("Gonna add user");
-    var view = Ext.widget('customerform');
+    var view = Ext.widget('employeeform');
 // what is Ext.widget? 
 // is that creating a new instance window? 
 // Convenient shorthand to create a widget by its xtype or a config object. S
@@ -59,12 +58,12 @@ Ext.define('AM.controller.Customers', {
   },
 
   editUser: function() {
-		console.log("event listener editUser");
+		// console.log("event listener editUser");
     var record = this.getList().getSelectedUser();
 		if( record ) {
 			console.log("The name is " + record.get("name"));
 		}
-    var view = Ext.widget('customerform');
+    var view = Ext.widget('employeeform');
 		if( view ) {
 			console.log("The view is not nil");
 		}
@@ -77,7 +76,7 @@ Ext.define('AM.controller.Customers', {
     var win = button.up('window');
     var form = win.down('form');
 
-    var store = this.getCustomersStore();
+    var store = this.getEmployeesStore();
     var record = form.getRecord();
     var values = form.getValues();
 
@@ -125,7 +124,7 @@ Ext.define('AM.controller.Customers', {
 		}else{
 			//  no record at all  => gonna create the new one 
 			console.log("NO USER. GONNA CREATE");
-			var newObject = new AM.model.Customer( values ) ;
+			var newObject = new AM.model.Employee( values ) ;
 			if( newObject.isValid() ){
 				console.log("The new object is valid");
 				store.add( newObject);
@@ -149,7 +148,7 @@ Ext.define('AM.controller.Customers', {
     var record = this.getList().getSelectedUser();
 
     if (record) {
-      var store = this.getUsersStore();
+      var store = this.getEmployeesStore();
       store.remove(record);
       store.sync();
 // to do refresh programmatically

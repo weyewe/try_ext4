@@ -12,13 +12,16 @@ Ext.define("AM.view.Cardpanel", {
 			xtype		: 'departmentmanager'
 		},
 		{
-			xtype		: 'employeemanager'
+			xtype		: 'employeelist'
+		},
+		{
+			xtype		: 'customerlist'
 		}
 	],
 	
  
 	initComponent: function(){ 
-		var selectedActiveItemIndex = 1; 
+		var selectedActiveItemIndex = 2; 
 		
 		Ext.apply(this,	{
 			activeItem		: selectedActiveItemIndex, 
@@ -51,10 +54,19 @@ Ext.define("AM.view.Cardpanel", {
 				'-',
 				{
 					text			: 'Manage Employees',
-					itemType		: 'employeemanager',
+					itemType		: 'employeelist',
 					toggleGrp		: 'navGrp',
 					enableToggle	: true, 
 					pressed			:  (  selectedActiveItemIndex   === 2 )  ,
+					action			: 'changetoolbar'
+				},
+				'-',
+				{
+					text			: 'Manage Customer',
+					itemType		: 'customerlist',
+					toggleGrp		: 'navGrp',
+					enableToggle	: true, 
+					pressed			:  (  selectedActiveItemIndex   === 3 )  ,
 					action			: 'changetoolbar'
 				},
 				'->',
