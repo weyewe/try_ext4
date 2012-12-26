@@ -5,6 +5,7 @@ Ext.define('AM.view.util.CrudList' ,{
   	// store: 'Users', 
 	store	: undefined,
 	title	: undefined, 
+	columns	: undefined, 
  
 
 	initComponent: function() {
