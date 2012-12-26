@@ -38,3 +38,9 @@ Ext.onReady(function(){
 	  }, this);
 	
 });
+
+/*
+Try this guy's 
+http://www.sencha.com/forum/archive/index.php/t-136613.html
+
+*/

@@ -58,34 +58,99 @@ Ext.define('AM.controller.BaseCrud', {
 	// 	} 
 	// ],
 	
-	formSelector	: 'objectform',
-	listSelector	: 'objectlist',
-	backingStore	: 'Objects',
-	backingModel	: 'Object',
+	formSelector	: undefined	,
+	listSelector	: undefined	,
+	backingStore	: undefined  ,
+	backingModel	: undefined  ,
+	
+	constructor		: function(config){
+		var me	= this; 
+		var newRefs = [
+			{
+				ref			: 'list',
+				selector	:  me.listSelector 
+			}
+		];
+		
+		me.refs	= me.refs? Ext.Array.merge( me.refs, newRefs)	: newRefs; 
+		me.callParent( arguments ); 
+	}
 	
 
 
 	init: function() {
-		this.control({
-			this.formSelector	+ ' ' + 'button[action=save]': {
-				click: this.updateObject
-			},
-			
-			this.listSelector : {
-				itemdblclick: this.editObject,
-				selectionchange: this.selectionChange
-			},
-			this.listSelector	+ ' ' + 'button[action=addObject]': {
-				click: this.addObject
-			},
-			this.listSelector	+ ' ' +  ' button[action=editObject]': {
-				click: this.editObject
-			},
-			this.listSelector	+ ' ' + ' button[action=deleteObject]': {
-				click: this.deleteObject
-			} 
-
-		});
+		var me= this, key; 
+		me.callParent( arguments); 
+		
+		// var ctrlParams, toControl = {
+		// 	'button[action=add]' : {
+		// 		click	: me.onAddClicked
+		// 	}
+		// 	
+		// };
+		// 
+		// // var	containerSelector = 'somemodelview';
+		// 
+		// for( key in toControl ){
+		// 	if( toControl.hasOwnProperty( key ) ){
+		// 		ctrlParams = {};
+		// 		ctrlParams[me.containerSelector + " " + key] = toControl[key];
+		// 		/* 
+		// 		ctrlParams['somemodelview button[action=add]'] = {
+		// 			click	: me.onAddClicked
+		// 		};
+		// 			
+		// 		*/
+		// 		me.control( ctrlParams ) ;
+		// 	}
+		// }
+		
+		var ctrlParams= {};
+		ctrlParams[ me.formSelector + ' ' + 'button[action=save]' ] = {
+			click: me.updateObject
+		};
+		
+		ctrlParams[ me.listSelector ] = {
+			click: me.updateObject
+		};
+		
+		ctrlParams[me.listSelector	+ ' ' + 'button[action=addObject]'] = {
+			click: me.addObject
+		};
+		
+		
+		ctrlParams[me.listSelector	+ ' ' +  ' button[action=editObject]'] = {
+			click: me.editObject
+		};
+		
+		ctrlParams[ me.listSelector	+ ' ' + ' button[action=deleteObject]' ] = {
+			click: me.deleteObject
+		};
+		
+		me.control(ctrlParams );
+		
+		
+		
+		// this.control({
+		// 	this.formSelector	+ ' ' + 'button[action=save]': {
+		// 		click: this.updateObject
+		// 	},
+		// 	
+		// 	this.listSelector : {
+		// 		itemdblclick: this.editObject,
+		// 		selectionchange: this.selectionChange
+		// 	},
+		// 	this.listSelector	+ ' ' + 'button[action=addObject]': {
+		// 		click: this.addObject
+		// 	},
+		// 	this.listSelector	+ ' ' +  ' button[action=editObject]': {
+		// 		click: this.editObject
+		// 	},
+		// 	this.listSelector	+ ' ' + ' button[action=deleteObject]': {
+		// 		click: this.deleteObject
+		// 	} 
+		// 
+		// });
 	},
  
 
