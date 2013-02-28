@@ -104,44 +104,46 @@ Ext.define('AM.controller.Customers', {
 		// TASK: separate between CREATE or UPDATE
 		
 		if( record ){
-			record.beginEdit(); 
-			// if there is record present in the form, this must be an update
 			record.set( values );
-			// just by setting the values, the gridPanel is changed!!! FUCK!
-			
-			if( record.isValid() ) {
-				// record.save(); 
-				record.endEdit(); 
-				store.sync(); 
+			 
+			record.save({
+				success : function(record){
+					console.log("UPDATE is successful");
+					//  since the grid is backed by store, if store changes, it will be updated
+					store.load();
+					win.close();
+				},
+				failure : function(record,op ){
+					console.log("UPDATE is a failure");
+					var message  = op.request.scope.reader.jsonData["message"];
+					var errors = message['errors'];
+					form.getForm().markInvalid(errors);
+				}
+			});
 				
-				win.close(); 
-			}else{ 
-				// record is not valid 
-				var errors = record.validate(); 
-				form.getForm().markInvalid(errors);
-				console.log("The record isn ot valid. NO UPDATE");
-				record.cancelEdit();
-			}
+			 
 		}else{
 			//  no record at all  => gonna create the new one 
 			console.log("NO USER. GONNA CREATE");
+			var me  = this; 
 			var newObject = new AM.model.Customer( values ) ;
-			if( newObject.isValid() ){
-				console.log("The new object is valid");
-				store.add( newObject);
-				console.log("GONNNAA CALL THE SYNC"); 
-				
-				store.sync();
-				this.getList().query('pagingtoolbar')[0].doRefresh();
-			 
-				win.close();
-				
-			}else{
-				console.log("The new object is not valid ");
-			}
 			
-			var errors = newObject.validate();
-			form.getForm().markInvalid(errors);
+			// learnt from here
+			// http://www.sencha.com/forum/showthread.php?137580-ExtJS-4-Sync-and-success-failure-processing
+			newObject.save({
+				success: function(record){
+					console.log("This is successful");
+					//  since the grid is backed by store, if store changes, it will be updated
+					store.load();
+					win.close();
+				},
+				failure: function( record, op){
+					console.log("This is a failure");
+					var message  = op.request.scope.reader.jsonData["message"];
+					var errors = message['errors'];
+					form.getForm().markInvalid(errors);
+				}
+			});
 		} 
   },
 
@@ -149,7 +151,7 @@ Ext.define('AM.controller.Customers', {
     var record = this.getList().getSelectedUser();
 
     if (record) {
-      var store = this.getUsersStore();
+      var store = this.getCustomersStore();
       store.remove(record);
       store.sync();
 // to do refresh programmatically

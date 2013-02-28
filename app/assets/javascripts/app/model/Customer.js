@@ -6,10 +6,35 @@ Ext.define('AM.model.Customer', {
   	],
 
   	validations: [
-    	{ type: 'presence', field: 'name' } 
+    	// { type: 'presence', field: 'name' } 
   	],
 
-  	idProperty: 'id' 
+  	idProperty: 'id' ,proxy: {
+			url: '/customers',
+			type: 'rest',
+			format: 'json',
+
+			reader: {
+				root: 'customers',
+				record: 'customer',
+				successProperty: 'success',
+				totalProperty : 'total'
+			},
+
+			// reader: {
+			// 	root: 'data',
+			// 	record: 'customer',
+			// 	successProperty: 'success',
+			// 	totalProperty : 'total',
+			// 	messageProperty: 'message'
+			// },
+
+			writer: {
+				getRecordData: function(record) {
+					return { customer : record.data };
+				}
+			}
+		}
 	
   
 });

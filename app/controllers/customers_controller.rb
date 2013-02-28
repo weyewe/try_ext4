@@ -17,8 +17,25 @@ class CustomersController < ApplicationController
 
     respond_to do |format|
       if @object.save
+        puts "The sAVE is successful\n"*10
         format.json { render :json => { :success => true, :customers => [@object] , 
                                         :total => Customer.all.count } }
+      else
+        puts "The sAVE FAILS\n"*10
+        msg = {
+          :success => false, 
+          :message => {
+            :errors => {
+              :name => "Nama tidak boleh kosong"
+            }
+          }
+        }
+        
+        format.json { render :json => msg } 
+                                        
+                                        
+                                        
+                                        
       end
     end
   end
@@ -30,6 +47,17 @@ class CustomersController < ApplicationController
       if @object.update_attributes(params[:customer])
         format.json { render :json => { :success => true, :customers => [@object],
                                         :total => Customer.all.count  } }
+      else
+        msg = {
+          :success => false, 
+          :message => {
+            :errors => {
+              :name => "Nama tidak boleh kosong"
+            }
+          }
+        }
+        
+        format.json { render :json => msg }
       end
     end
   end

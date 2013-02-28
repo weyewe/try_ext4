@@ -7,24 +7,7 @@ Ext.define('AM.store.Customers', {
   	autoSync: false,
 	pageSize : 10, 
 	
-	proxy: {
-		url: '/customers',
-		type: 'rest',
-		format: 'json',
 	
-		reader: {
-			root: 'customers',
-			record: 'customer',
-			successProperty: 'success',
-			totalProperty : 'total'
-		},
-			
-		writer: {
-			getRecordData: function(record) {
-				return { customer : record.data };
-			}
-		}
-	},
 		
 		
 	sorters : [
